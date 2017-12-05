@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * @file
+ * Implements hooks.
+ */
+
+/**
+ * Implements hook_entity_type_alter().
+ */
+function node_access_delegate_entity_type_alter(array &$entity_types) {
+  /** @var \Drupal\Core\Entity\ContentEntityType $nodeEntityType */
+  $nodeEntityType = $entity_types['node'];
+
+  // Replace the default form controller with our form that will delegate
+  // all methods to alter plugins with the specific entity type.
+  $nodeEntityType->setHandlerClass('access', 'Drupal\node_access_delegate\NodeAccessControlHandler');
+
+  // If translation is enabled we have to add custom handler to that as-well
+  // which will delegate functionality to the plugins.
+  if ($nodeEntityType->hasHandlerClass('translation')) {
+    $nodeEntityType->setHandlerClass('translation', 'Drupal\node_access_delegate\NodeTranslationHandler');
+  }
+}

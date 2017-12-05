@@ -1,0 +1,5 @@
+name: Node access delegate
+type: module
+description: Provides plugin type for extending node access logic per bundle.
+package: plugin
+core: 8.x

@@ -1,0 +1,4 @@
+services:
+  plugin.manager.node_access_delegate:
+    class: Drupal\node_access_delegate\NodeAccessDelegateManager
+    parent: default_plugin_manager
